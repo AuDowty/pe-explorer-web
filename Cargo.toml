@@ -1,0 +1,24 @@
+[package]
+name = "pe-explorer-web"
+version = "0.1.0"
+edition = "2021"
+license = "MIT"
+description = "WASM PE/COFF parser for the pe-explorer.win web UI."
+repository = "https://github.com/AuDowty/pe-explorer-web"
+
+[lib]
+crate-type = ["cdylib"]
+
+[dependencies]
+wasm-bindgen = "0.2"
+serde_json = "1"
+
+[profile.release]
+opt-level = "z"
+lto = true
+codegen-units = 1
+strip = true
+panic = "abort"
+
+[package.metadata.wasm-pack.profile.release]
+wasm-opt = false

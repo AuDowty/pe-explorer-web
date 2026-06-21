@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+<meta http-equiv="Pragma" content="no-cache" />
+<meta http-equiv="Expires" content="0" />
+<title>pe-explorer — inspect Windows binaries in your browser</title>
+<meta name="description" content="Drag a Windows .exe or .dll onto this page to see its PE headers, sections, imports, and exports. Parsed in your browser via Rust + WASM. Nothing is uploaded." />
+<link rel="stylesheet" href="./style.css?v=2" />
+</head>
+<body>
+<header>
+  <div class="brand">
+    <strong>pe-explorer</strong>
+    <span class="sub">PE / COFF inspector, all in your browser</span>
+  </div>
+  <nav>
+    <a href="https://github.com/AuDowty/pe-explorer-web" target="_blank" rel="noopener">source</a>
+    <a href="https://github.com/AuDowty/pe-info" target="_blank" rel="noopener">cli</a>
+  </nav>
+</header>
+
+<main>
+  <div id="drop" class="drop">
+    <div class="drop-inner">
+      <div class="drop-icon">↓</div>
+      <div class="drop-title">drop a <code>.exe</code> or <code>.dll</code> here</div>
+      <div class="drop-sub">or <label for="file" class="link">choose a file</label> · nothing is uploaded, parsing runs locally</div>
+      <input id="file" type="file" accept=".exe,.dll,.sys,.ocx,application/octet-stream" hidden />
+    </div>
+  </div>
+
+  <div id="error" class="error" hidden></div>
+
+  <section id="result" hidden>
+    <div class="head">
+      <h1 id="filename"></h1>
+      <div class="stat-row" id="quickstats"></div>
+    </div>
+
+    <nav class="tabs" id="tabs">
+      <button data-tab="headers" class="active">Headers</button>
+      <button data-tab="sections">Sections</button>
+      <button data-tab="imports">Imports</button>
+      <button data-tab="exports">Exports</button>
+    </nav>
+
+    <div class="tab-pane active" id="tab-headers"></div>
+    <div class="tab-pane" id="tab-sections"></div>
+    <div class="tab-pane" id="tab-imports"></div>
+    <div class="tab-pane" id="tab-exports"></div>
+  </section>
+</main>
+
+<footer>
+  Parsed by <a href="https://github.com/AuDowty/pe-info" target="_blank" rel="noopener">pe-info</a> compiled to WASM ·
+  <a href="https://github.com/AuDowty" target="_blank" rel="noopener">@AuDowty</a>
+</footer>
+
+<script type="module" src="./app.js?v=2"></script>
+</body>
+</html>
